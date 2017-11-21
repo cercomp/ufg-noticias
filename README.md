@@ -4,7 +4,7 @@
 
 Webcomponente de notícias da UFG - Universidade Federal de Goiás
 
-[DEMO](https://joserochadocarmo.github.io/ufg-noticias)
+[DEMO](https://joserochadocarmo.github.io/ufg-noticias/index.html)
 [PRODUCTION](https://www.ufg.br/news)
 
 Example Usage:
