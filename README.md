@@ -1,11 +1,11 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joserochadocarmo/ufg-eventos)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joserochadocarmo/ufg-noticias)
 
-# \<ufg-eventos\>
+# \<ufg-noticias\>
 
-Webcomponente de eventos da UFG - Universidade Federal de Goiás
+Webcomponente de notícias da UFG - Universidade Federal de Goiás
 
-[DEMO](https://joserochadocarmo.github.io/ufg-eventos)
-[PRODUCTION](https://www.ufg.br/events)
+[DEMO](https://joserochadocarmo.github.io/ufg-noticias)
+[PRODUCTION](https://www.ufg.br/news)
 
 Example Usage:
 
@@ -14,7 +14,7 @@ Example Usage:
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="ufg-eventos.html">
+    <link rel="import" href="ufg-noticias.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -22,7 +22,7 @@ Example Usage:
 -->
 
 ```html
-<ufg-eventos></ufg-eventos>
+<ufg-noticias></ufg-noticias>
 ```
 
 ### Instalação
@@ -33,7 +33,7 @@ Pra rodar você precisa de um HTTP Server, o Chrome tem uma extensão que resolv
 
 Faça uma cópia do projeto para seu computador
 ```
-git clone https://github.com/joserochadocarmo/ufg-eventos.git && cd ufg-eventos
+git clone https://github.com/joserochadocarmo/ufg-noticias.git && cd ufg-noticias
 ```
 
 Rode o seguinte comando(não modifique) dentro da pasta, é necessario ter docker instalado:
@@ -58,10 +58,10 @@ docker run --rm -it -v $(pwd):/home/node/app -u node fresnizky/polymer-cli polym
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.1/webcomponents-lite.js"></script>
-<link rel="import" href="https://xxxxx/xxxx/ufg-eventos.html">
+<link rel="import" href="https://xxxxx/xxxx/ufg-noticias.html">
 ```
 
-IMPORTANTE: No nosso caso, vc deve copiar o arquivo de build(ufg-eventos.html) para a pasta docs deste projeto! Porquê? Porque usamos o github como servidor:
+IMPORTANTE: No nosso caso, vc deve copiar o arquivo de build(ufg-noticias.html) para a pasta docs deste projeto! Porquê? Porque usamos o github como servidor:
 ```html
-<link rel="import" href="https://joserochadocarmo.github.io/ufg-eventos/ufg-eventos.html">
+<link rel="import" href="https://joserochadocarmo.github.io/ufg-noticias/ufg-noticias.html">
 ```
