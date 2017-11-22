@@ -156,7 +156,7 @@
     <iron-media-query id="mediaQuery" query="(max-width: 640px)"></iron-media-query>
     <slot name="grid">
       <div class="list">
-        <div href="[[url]]/n/[[blog.slug]]" class="item">
+        <div href="n/[[blog.slug]]" class="item">
           <!--<div class="item-header">
             <moment-element datetime="[[blog.created_at]]" output-format="MMM DD YYYY"></moment-element>
             <span class="littleText">Fonte: [[blog.source]]</span>
@@ -164,16 +164,16 @@
           <div class="item-content">
             <div class="overlay" hidden=""></div>
             <!--<iron-image class="folder" on-click="redirectNews(blog.slug)" preload fade sizing="cover" src$="[[url]][[blog.image]]" ></iron-image>-->
-            <a href$="[[url]]/n/[[blog.slug]]" class="folder-left">
-              <iron-image class="folder folder-left" src="[[url]][[blog.image]]" preload fade sizing="cover"></iron-image>
+            <a href$="n/[[blog.slug]]" class="folder-left">
+              <iron-image class="folder folder-left" src$="[[blog.image]]" preload fade sizing="cover"></iron-image>
             </a>
             <div class="content">
               <!--<div class="item-header" hidden=""></div>-->
               <h2 class="title primary">
-                <a href="[[url]]/n/[[blog.slug]]">[[blog.title]]</a>
+                <a href="n/[[blog.slug]]">[[blog.title]]</a>
               </h2>
               <div class="description shortText">
-                <a href="[[url]]/n/[[blog.slug]]">
+                <a href="n/[[blog.slug]]">
                   <echo-html html="{{blog.summary}}"></echo-html>
                 </a>
               </div>
@@ -199,14 +199,14 @@
     </slot>
 
     <slot name="list">
-      <paper-card image="[[url]][[blog.image]]" alt="[[blog.name]]" fade-image="true">
+      <paper-card image="[[blog.image]]" alt="[[blog.name]]" fade-image="true">
         <div class="card-content primary">
-          <a href="[[url]]/n/[[blog.slug]]" class="primary">
+          <a href="n/[[blog.slug]]" class="primary">
             [[blog.title]]
           </a>
         </div>
         <div class="card-actions">
-          <a href="[[url]]/n/[[blog.slug]]">
+          <a href="n/[[blog.slug]]">
             <div class="container">
               <div class="shortText child">
                 <echo-html html="{{blog.summary}}"></echo-html>
@@ -268,13 +268,6 @@
       static get properties() {
         return {
           blog: {
-          },
-          url: {
-            type: String,
-            value: () => {
-              let url = window.location.hostname;
-              return url.indexOf("ufg.br") > 0 ? url : "https://www.ufg.br"
-            }
           }
         };
       }
