@@ -143,7 +143,7 @@
           </ufg-noticia>
         </template>
       </div>
-      <div id="list" name="grid" class="cards">
+      <div name="grid" class="cards">
         <template is="dom-repeat" items="{{lastResponse.news}}" as="blog">
           <ufg-noticia blog="[[blog]]" class="grid">
             <div slot="grid"></div>
@@ -222,8 +222,8 @@
         let mobile = this.$.mediaQuery.queryMatches;
         if (mobile){
           this.selector = "grid";
-          alert("ok");
-          this.lowerThreshold = 4000;
+        }else{
+          this.lowerThreshold = 1000;
         }
       }
 
