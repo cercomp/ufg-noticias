@@ -26,8 +26,8 @@
         background-color: var(--event-item-bg, white);
         border: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
-        padding-bottom: 15px;
-        padding-top: 20px;
+        padding-bottom: 10px;
+        padding-top: 15px;
         margin-bottom: 10px;
       }
 
@@ -78,8 +78,8 @@
       }
 
       .folder {
-        min-height: 140px;
-        min-width: 130px;
+        min-height: 170px;
+        min-width: 290px;
         box-sizing: border-box;
         background-color: #DDD;
         /*background: #f5f5f5;*/
@@ -178,13 +178,13 @@
                 </a>
               </div>
               <div class="littleText">
-                <iron-icon class="mini" icon="icons:visibility"></iron-icon>
-                <span class="title">Visitas:</span> [[blog.view_count]]
-              </div>
-              <div class="littleText">
                 <iron-icon class="mini" icon="icons:event"></iron-icon>
                 <span class="title">Data:</span>
                 <moment-element datetime="[[blog.created_at]]" output-format="llll"></moment-element>
+              </div>
+              <div class="littleText">
+                <iron-icon class="mini" icon="icons:visibility"></iron-icon>
+                <span class="title">Visitas:</span> [[blog.view_count]]
               </div>
               <div class="littleText">
                 <iron-icon class="mini" icon="icons:label"></iron-icon>
