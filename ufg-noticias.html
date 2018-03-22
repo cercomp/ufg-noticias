@@ -18,7 +18,7 @@
   <template>
 
     <style is="custom-style">
-       :host {
+      :host {
         display: block;
         background-color: var(--event-bg, white);
         font-family: 'Roboto', 'Noto', sans-serif;
@@ -93,16 +93,17 @@
           max-width: 100%;
         }
       }
+
     </style>
 
     <iron-media-query id="mediaQuery" query="(max-width: 640px)" on-query-matches-changed="switchQuery"></iron-media-query>
 
-    <iron-ajax id="nextNews" url="[[_getParams(page)]]" loading="{{loading}}" on-response="_handleResponse" debounce-duration="300"></iron-ajax>
+    <iron-ajax id="nextNews" url="{{getParams(page)}}" loading="{{loading}}" on-response="handleResponse" debounce-duration="300"></iron-ajax>
 
-    <iron-ajax auto url="[[_getParams()]]" handleAs="text" loading="{{loading}}" last-response="{{lastResponse}}" debounce-duration="300"></iron-ajax>
+    <iron-ajax auto url="{{getParams()}}" handleAs="text" loading="{{loading}}" last-response="{{lastResponse}}" debounce-duration="300"></iron-ajax>
 
     <div class="center">
-      <ufg-search id="search" placeholder="Pesquisar..." type="search" value="[[searchValue()]]"></ufg-search>
+      <ufg-search id="search" placeholder="Pesquisar..." type="search" value="{{searchValue('search')}}"></ufg-search>
       <!--<input hidden="true" type="submit" />-->
     </div>
 
@@ -118,34 +119,30 @@
       </iron-selector>
     </div>
 
-    <!--<div class="center">
-      <paper-spinner active$="{{loading}}"></paper-spinner>
-    </div>-->
-
     <div class="list">
       <template is="dom-if" if="{{lastResponse.news.length}}">
         <p class="center">{{lastResponse.meta.total}} notícias(s) encontrada(s)</p>
       </template>
-
       <template is="dom-if" if="{{!lastResponse.news.length}}">
         <p class="center">Nenhuma notícia encontrada!</p>
-      </template>
+      </template>     
     </div>
+
     <!-- this element loads more photos when the user scrolls down and reached the lower threshold -->
-    <iron-scroll-threshold id="scrollThreshold" scroll-target="document" on-lower-threshold="loadMoreData" lower-threshold="[[lowerThreshold]]">
+    <iron-scroll-threshold id="scrollThreshold" scroll-target="document" on-lower-threshold="loadMoreData" lower-threshold="{{lowerThreshold}}">
     </iron-scroll-threshold>
 
-    <iron-pages attr-for-selected="name" selected="[[selector]]">
+    <iron-pages attr-for-selected="name" selected="{{selector}}">
       <div name="list">
         <template is="dom-repeat" items="{{lastResponse.news}}" as="blog">
-          <ufg-noticia blog="[[blog]]">
+          <ufg-noticia blog="{{blog}}">
             <div slot="list"></div>
           </ufg-noticia>
         </template>
       </div>
       <div name="grid" class="cards">
         <template is="dom-repeat" items="{{lastResponse.news}}" as="blog">
-          <ufg-noticia blog="[[blog]]" class="grid">
+          <ufg-noticia blog="{{blog}}" class="grid">
             <div slot="grid"></div>
           </ufg-noticia>
         </template>
@@ -181,10 +178,7 @@
               return url.indexOf("ufg.br") > 0 ? "/news.json" : "https://www.ufg.br/news.json"
             }
           },
-          today: {
-            type: Object,
-            value: moment()
-          },
+
           page: {
             type: Number,
             value: 1,
@@ -209,18 +203,18 @@
       /**
       * Retorna os parâmetos da URL.
       **/
-      _getParams(page) {
-        return this.url + "?" + location.search + `&page=${this.page}&per_page=10`;
+      getParams(page) {
+        return this.url + "?" + location.search.replace("?", "") + `&page=${this.page}&per_page=10`;
       }
 
-      _handleResponse(e) {
+      handleResponse(e) {
         e.detail.response.news.unshift(...this.lastResponse.news);
         this.lastResponse = e.detail.response;
       }
 
       switchQuery(e) {
         let mobile = this.$.mediaQuery.queryMatches;
-        if (mobile){
+        if (mobile) {
           this.selector = "grid";
           this.lowerThreshold = 2000;
         }
@@ -241,10 +235,10 @@
         }.bind(this), 500);
       }
 
-      searchValue() {
+      searchValue(value) {
         var found;
         window.location.search.substr(1).split("&").forEach(function (item) {
-          if ("search" == item.split("=")[0]) {
+          if (value == item.split("=")[0]) {
             found = item.split("=")[1];
           }
         });

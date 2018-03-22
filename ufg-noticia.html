@@ -8,7 +8,7 @@
 <dom-module id="ufg-noticia">
   <template>
 
-    <style is="custom-style" >
+    <style is="custom-style">
       h2 {
         margin-top: -2px;
         margin-bottom: 17px;
@@ -152,11 +152,37 @@
       paper-card:hover {
         background: #f5f5f5;
       }
+
+      .weby-label {
+        display: inline;
+        padding: .2em .6em .3em;
+        font-size: 75%;
+        font-weight: bold;
+        line-height: 1;
+        color: #FFFFFF;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25em;
+        text-decoration: none;
+      }
+
+      .weby-tag-on {
+        background-color: #5bc0de;
+      }
+
+      /* .weby-tag-on::after {        
+        content: " X"
+      } */
+
+      .weby-tag-off {
+        background-color: #999;
+      }
     </style>
     <iron-media-query id="mediaQuery" query="(max-width: 640px)"></iron-media-query>
     <slot name="grid">
       <div class="list">
-        <div href="n/[[blog.slug]]" class="item">
+        <div href="[[url]]/n/[[blog.slug]]" class="item">
           <!--<div class="item-header">
             <moment-element datetime="[[blog.created_at]]" output-format="MMM DD YYYY"></moment-element>
             <span class="littleText">Fonte: [[blog.source]]</span>
@@ -164,16 +190,16 @@
           <div class="item-content">
             <div class="overlay" hidden=""></div>
             <!--<iron-image class="folder" on-click="redirectNews(blog.slug)" preload fade sizing="cover" src$="[[url]][[blog.image]]" ></iron-image>-->
-            <a href$="n/[[blog.slug]]" class="folder-left">
-              <iron-image class="folder folder-left" src$="[[blog.image]]" preload fade sizing="cover"></iron-image>
+            <a href$="[[url]]/n/[[blog.slug]]" class="folder-left">
+              <iron-image class="folder folder-left" src$="[[url]][[blog.image]]" preload fade sizing="cover"></iron-image>
             </a>
             <div class="content">
               <!--<div class="item-header" hidden=""></div>-->
               <h2 class="title primary">
-                <a href="n/[[blog.slug]]">[[blog.title]]</a>
+                <a href="[[url]]/n/[[blog.slug]]">[[blog.title]]</a>
               </h2>
               <div class="description shortText">
-                <a href="n/[[blog.slug]]">
+                <a href="[[url]]/n/[[blog.slug]]">
                   <echo-html html="{{blog.summary}}"></echo-html>
                 </a>
               </div>
@@ -188,7 +214,15 @@
               </div>
               <div class="littleText">
                 <iron-icon class="mini" icon="icons:label"></iron-icon>
-                <span class="title">Tags:</span> [[blog.category_list]]
+                <!-- <span class="title">Tags:</span>[[blog.category_list]] -->
+                <span class="title">Tags:</span>
+                <dom-repeat items="[[blog.category_list]]">
+                  <template>
+                    <a href$="[[urlTag(item)]]">
+                      <span class$="weby-label weby-tag-[[info(item)]]">[[item]]</span>
+                    </a>
+                  </template>
+                </dom-repeat>
               </div>
             </div>
 
@@ -199,14 +233,14 @@
     </slot>
 
     <slot name="list">
-      <paper-card image="[[blog.image]]" alt="[[blog.name]]" fade-image="true">
+      <paper-card image="[[url]][[blog.image]]" alt="[[blog.name]]" fade-image="true">
         <div class="card-content primary">
-          <a href="n/[[blog.slug]]" class="primary">
+          <a href="[[url]]/n/[[blog.slug]]" class="primary">
             [[blog.title]]
           </a>
         </div>
         <div class="card-actions">
-          <a href="n/[[blog.slug]]">
+          <a href="[[url]]/n/[[blog.slug]]">
             <div class="container">
               <div class="shortText child">
                 <echo-html html="{{blog.summary}}"></echo-html>
@@ -224,9 +258,9 @@
                 <iron-icon class="mini" icon="icons:label"></iron-icon>
                 <span class="title">Tags:</span> [[blog.category_list]]
               </div>
-
-            </div>
           </a>
+
+          </div>
         </div>
       </paper-card>
     </slot>
@@ -268,12 +302,22 @@
       static get properties() {
         return {
           blog: {
+          },
+          /** Só usado para ambiente de desenvolvimento**/
+          url: {
+            type: String,
+            value: () => {
+              let url = window.location.hostname;
+              return url.indexOf("ufg.br") > 0 ? null : "https://www.ufg.br"
+            }
           }
         };
       }
 
+      /**
+      Redireciona para a pagina de noticias
+      **/
       redirectNews(slug) {
-        // console.log(slug)
         window.location = this.url + "n" + slug;
       }
 
@@ -292,6 +336,23 @@
           format += " [às] h:mm";
         }
         return moment(date).format(format);
+      }
+
+      /**
+      * Formata tag. Ex: caso seja a tag clicada, fica em azul.      
+      **/
+      info(value = "") {
+        var found;
+        window.location.search.substr(1).split("&").forEach(function (item) {
+          if (value.toUpperCase() == decodeURIComponent(item.split("=")[1].toUpperCase())) {
+            found = "on";
+          }
+        });
+        return found || "off";
+      }
+
+      urlTag(item) {
+        return this.info(item) == "off" ? "?tags=" + item : "?direction=desc&page=1&per_page=10";
       }
     }
 
