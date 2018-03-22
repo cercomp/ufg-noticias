@@ -165,6 +165,7 @@
         vertical-align: baseline;
         border-radius: .25em;
         text-decoration: none;
+        margin-left: 4px;
       }
 
       .weby-tag-on {
@@ -344,7 +345,8 @@
       info(value = "") {
         var found;
         window.location.search.substr(1).split("&").forEach(function (item) {
-          if (value.toUpperCase() == decodeURIComponent(item.split("=")[1].toUpperCase())) {
+          console.log(value.toLowerCase(), decodeURIComponent(item.split("=")[1].toLowerCase()));
+          if (value.toLowerCase() == decodeURIComponent(item.split("=")[1].toLowerCase())) {
             found = "on";
           }
         });
