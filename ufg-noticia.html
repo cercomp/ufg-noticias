@@ -345,7 +345,6 @@
       info(value = "") {
         var found;
         window.location.search.substr(1).split("&").forEach(function (item) {
-          console.log(value.toLowerCase(), decodeURIComponent(item.split("=")[1].toLowerCase()));
           if (value.toLowerCase() == decodeURIComponent(item.split("=")[1].toLowerCase())) {
             found = "on";
           }
