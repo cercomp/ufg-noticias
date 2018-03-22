@@ -344,8 +344,11 @@
       **/
       info(value = "") {
         var found;
+        
         window.location.search.substr(1).split("&").forEach(function (item) {
-          if (value.toLowerCase() == decodeURIComponent(item.split("=")[1].toLowerCase())) {
+          var tag = item.split("=")[1] || "";
+          console.log(decodeURIComponent(tag).toLowerCase(),value)
+          if (value.toLowerCase() == decodeURIComponent(tag).toLowerCase()) {
             found = "on";
           }
         });

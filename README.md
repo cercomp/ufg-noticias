@@ -36,7 +36,8 @@ Faça uma cópia do projeto para seu computador
 git clone https://github.com/joserochadocarmo/ufg-noticias.git && cd ufg-noticias
 ```
 
-Rode o seguinte comando(não modifique) dentro da pasta, é necessario ter docker instalado:
+Rode o seguinte comando(não modifique) dentro da pasta, é necessario ter docker instalado;
+Esse comando baixa as dependências do projeto.
 
 ```
 docker run --rm -it -v $(pwd):/home/node/app -u node fresnizky/polymer-cli bower install --allow-root
