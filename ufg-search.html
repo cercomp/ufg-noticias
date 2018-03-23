@@ -41,7 +41,7 @@ Custom property | Description | Default
 <dom-module id="ufg-search">
   <template>
 
-    <style>
+    <style is="custom-style">
       :host {
         display: block;
         outline: 0;
@@ -83,6 +83,26 @@ Custom property | Description | Default
         --paper-input-container-underline-disabled: {
           display: none !important;
         };
+      }
+
+      input[type=text]::-ms-clear {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+      input[type=text]::-ms-reveal {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+      input[type="search"]::-webkit-search-decoration,
+      input[type="search"]::-webkit-search-cancel-button,
+      input[type="search"]::-webkit-search-results-button,
+      input[type="search"]::-webkit-search-results-decoration {
+        display: none;
+      }
+      input[type="search"] {
+        -webkit-appearance: none;
       }
 
     </style>
