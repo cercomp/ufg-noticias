@@ -61,70 +61,75 @@ Custom property | Description | Default
         @apply --input-search-container;
       }
 
-      paper-input {
+      paper-input {        
+
         --paper-input-container: {
-          padding: 3px 0 !important;
+          padding: 3px 0;
         }
-        ;
+        
         --paper-input-container-underline: {
-          display: none !important;
+          display: none;
         }
-        ;
+        
         --paper-input-container-input-webkit-spinner: {
-          display: none !important;
+          display: none;
         }
-        ;
+        
         --floated-label-placeholder: {
-          display: none !important;
+          display: none;
         }
-        ;
+        
         --paper-input-container-label-floating: {
-          display: none !important;
+          display: none;
         }
-        ;
+        
         --paper-input-container-underline-focus: {
-          display: none !important;
+          display: none;
         }
-        ;
+        
         --paper-input-container-underline-disabled: {
-          display: none !important;
+          display: none;
         }
-        ;
+        
       }
-
-      input[type=text]::-ms-clear {
-        display: none;
-        width: 0;
-        height: 0;
-      }
-
-      input[type=text]::-ms-reveal {
-        display: none;
-        width: 0;
-        height: 0;
-      }
-
-      input[type="search"]::-webkit-search-decoration,
-      input[type="search"]::-webkit-search-cancel-button,
-      input[type="search"]::-webkit-search-results-button,
-      input[type="search"]::-webkit-search-results-decoration {
-        display: none;
-      }
-
-      input[type="search"] {
-        position: relative !important;
+      
+      input {
+        color: inherit !important;
+        font: inherit !important;
+        line-height: inherit !important;
+        height: 56px !important;
+        position: relative !important; /* to make a stacking context */
         outline: none !important;
         box-shadow: none !important;
-        margin: 0 !important;
         padding: 0 !important;
         width: 100% !important;
+        min-width: 0 !important;
         max-width: 100% !important;
         background: transparent !important;
         border: none !important;
         -webkit-appearance: none !important;
         text-align: inherit !important;
         vertical-align: bottom !important;
-        min-width: 0 !important;        
+      }
+      [prefix],
+      [suffix] {
+        flex: none;
+      }
+      input::-webkit-input-placeholder {
+        color: inherit;
+        opacity: 0.7;
+      }
+      input:-moz-placeholder {
+        color: inherit;
+        opacity: 0.7;
+      }
+      input::-moz-placeholder {
+        color: inherit;
+        opacity: 0.7;
+      }
+      input:-ms-input-placeholder {
+        color: inherit;
+        opacity: 0.7;
       }
     </style>
     <div class="input-content">
